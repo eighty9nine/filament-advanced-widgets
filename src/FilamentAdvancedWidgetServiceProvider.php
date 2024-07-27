@@ -2,6 +2,7 @@
 
 namespace EightyNine\FilamentAdvancedWidget;
 
+use EightyNine\FilamentAdvancedWidget\Commands\Aliases\MakeAdvancedWidgetCommand;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -18,9 +19,9 @@ use EightyNine\FilamentAdvancedWidget\Testing\TestsFilamentAdvancedWidget;
 
 class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'filament-advanced-widgets';
+    public static string $name = 'advanced-widgets';
 
-    public static string $viewNamespace = 'filament-advanced-widgets';
+    public static string $viewNamespace = 'advanced-widgets';
 
     public function configurePackage(Package $package): void
     {
@@ -112,7 +113,7 @@ class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            FilamentAdvancedWidgetCommand::class,
+            MakeAdvancedWidgetCommand::class
         ];
     }
 
@@ -146,7 +147,6 @@ class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_filament-advanced-widgets_table',
         ];
     }
 }

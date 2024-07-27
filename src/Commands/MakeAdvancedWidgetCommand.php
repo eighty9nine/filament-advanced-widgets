@@ -19,14 +19,14 @@ class MakeAdvancedWidgetCommand extends Command
 {
     use CanManipulateFiles;
 
-    protected $description = 'Create a new Filament widget class';
+    protected $description = 'Create a new Filament advanced widget class';
 
     protected $signature = 'make:filament-widget {name?} {--R|resource=} {--C|chart} {--T|table} {--S|stats-overview} {--panel=} {--F|force}';
 
     public function handle(): int
     {
         $widget = (string) str($this->argument('name') ?? text(
-            label: 'What is the widget name?',
+            label: 'What is the advanced widget name?',
             placeholder: 'BlogPostsChart',
             required: true,
         ))
@@ -47,7 +47,7 @@ class MakeAdvancedWidgetCommand extends Command
             $this->option('stats-overview') => 'Stats overview',
             $this->option('table') => 'Table',
             default => select(
-                label: 'What type of widget do you want to create?',
+                label: 'What type of advanced widget do you want to create?',
                 options: ['Chart', 'Stats overview', 'Table', 'Custom'],
             ),
         };
