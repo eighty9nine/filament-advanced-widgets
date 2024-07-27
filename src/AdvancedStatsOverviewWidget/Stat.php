@@ -13,17 +13,16 @@ use Illuminate\View\ComponentAttributeBag;
 
 class Stat extends Component implements Htmlable
 {
-    use Macroable;
+    use Macroable,
+        Concerns\HasColorCustomisation,
+        Concerns\HasProgressBar,
+        Concerns\CanCustomiseIconPosition;
+
 
     /**
      * @var array<float> | null
      */
     protected ?array $chart = null;
-
-    /**
-     * @var string | array{50: string, 100: string, 200: string, 300: string, 400: string, 500: string, 600: string, 700: string, 800: string, 900: string, 950: string} | null
-     */
-    protected string | array | null $chartColor = null;
 
     /**
      * @var string | array{50: string, 100: string, 200: string, 300: string, 400: string, 500: string, 600: string, 700: string, 800: string, 900: string, 950: string} | null
@@ -76,16 +75,6 @@ class Stat extends Component implements Htmlable
     public static function make(string | Htmlable $label, $value): static
     {
         return app(static::class, ['label' => $label, 'value' => $value]);
-    }
-
-    /**
-     * @param  string | array{50: string, 100: string, 200: string, 300: string, 400: string, 500: string, 600: string, 700: string, 800: string, 900: string, 950: string} | null  $color
-     */
-    public function chartColor(string | array | null $color): static
-    {
-        $this->chartColor = $color;
-
-        return $this;
     }
 
     /**
@@ -200,14 +189,6 @@ class Stat extends Component implements Htmlable
     /**
      * @return string | array{50: string, 100: string, 200: string, 300: string, 400: string, 500: string, 600: string, 700: string, 800: string, 900: string, 950: string} | null
      */
-    public function getChartColor(): string | array | null
-    {
-        return $this->chartColor ?? $this->color;
-    }
-
-    /**
-     * @return string | array{50: string, 100: string, 200: string, 300: string, 400: string, 500: string, 600: string, 700: string, 800: string, 900: string, 950: string} | null
-     */
     public function getColor(): string | array | null
     {
         return $this->color;
@@ -221,14 +202,6 @@ class Stat extends Component implements Htmlable
     public function getDescription(): string | Htmlable | null
     {
         return $this->description;
-    }
-
-    /**
-     * @return string | array{50: string, 100: string, 200: string, 300: string, 400: string, 500: string, 600: string, 700: string, 800: string, 900: string, 950: string} | null
-     */
-    public function getDescriptionColor(): string | array | null
-    {
-        return $this->descriptionColor ?? $this->color;
     }
 
     public function getDescriptionIcon(): ?string
@@ -289,7 +262,7 @@ class Stat extends Component implements Htmlable
 
     public function render(): View
     {
-        return view('filament-widgets::stats-overview-widget.stat', $this->data());
+        return view('advanced-widgets::advanced-stats-overview-widget.stat', $this->data());
     }
 
     public function generateDataChecksum(): string

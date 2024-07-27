@@ -4,7 +4,9 @@ module.exports = {
     presets: [preset],
     content: [
         './app/Filament/**/*.php',
+        './src/AdvancedStatsOverviewWidget/Concerns/**/*.php',
         './resources/views/filament/**/*.blade.php',
+        './resources/views/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
     ],
 }

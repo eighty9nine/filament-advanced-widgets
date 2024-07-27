@@ -9,14 +9,26 @@
     $url = $getUrl();
     $tag = $url ? 'a' : 'div';
     $dataChecksum = $generateDataChecksum();
+    $iconPosition = $getIconPosition();
 
-    $descriptionIconClasses = \Illuminate\Support\Arr::toCssClasses([
-        'fi-wi-stats-overview-stat-description-icon h-5 w-5',
-        match ($descriptionColor) {
-            'gray' => 'text-gray-400 dark:text-gray-500',
-            default => 'text-custom-500',
-        },
-    ]);
+    $icon = $getIcon();
+    $iconClasses = "fi-wi-stats-overview-stat-icon h-8 w-8 {$getIconColor()}";
+    $backgroundColor = $iconHasBackgroundColor() ? $getIconBackgroundColor() : '';
+    $iconContainerClasses = "{$backgroundColor} h-fit p-1 rounded-lg";
+
+    $progress = $getProgress();
+    $progressBarColor = $getProgressBarColor();
+    $progressBarClasses = "fi-wi-stats-overview-stat-progress-bar h-full w-full rounded-lg {$progressBarColor}";
+
+    $backgroundColor = $getBackgroundColor();
+    $labelColor = $getLabelColor();
+    $valueColor = $getValueColor();
+    $descriptionColor = $getDescriptionColor();
+
+    $chartBorderColor = $getChartBorderColor();
+    $chartBackgroundColor = $getChartBackgroundColor();
+
+    $descriptionIconClasses = "fi-wi-stats-overview-stat-description-icon h-5 w-5 {$descriptionColor}";
 
     $descriptionIconStyles = \Illuminate\Support\Arr::toCssStyles([
         \Filament\Support\get_color_css_variables(
@@ -28,101 +40,76 @@
 @endphp
 
 <{!! $tag !!}
-    @if ($url)
-        {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab()) }}
-    @endif
-    {{
-        $getExtraAttributeBag()
-            ->class([
-                'fi-wi-stats-overview-stat relative rounded-xl bg-white p-6 shadow-sm ring-1 ring-gray-950/5 dark:bg-gray-900 dark:ring-white/10',
-            ])
-    }}
->
-    <div class="grid gap-y-2">
-        <div class="flex items-center gap-x-2">
-            @if ($icon = $getIcon())
-                <x-filament::icon
-                    :icon="$icon"
-                    class="fi-wi-stats-overview-stat-icon h-5 w-5 text-gray-400 dark:text-gray-500"
-                />
-            @endif
-
-            <span
-                class="fi-wi-stats-overview-stat-label text-sm font-medium text-gray-500 dark:text-gray-400"
-            >
-                {{ $getLabel() }}
-            </span>
-        </div>
-
-        <div
-            class="fi-wi-stats-overview-stat-value text-3xl font-semibold tracking-tight text-gray-950 dark:text-white"
-        >
-            {{ $getValue() }}
-        </div>
-
-        @if ($description = $getDescription())
-            <div class="flex items-center gap-x-1">
-                @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
-                    <x-filament::icon
-                        :icon="$descriptionIcon"
-                        :class="$descriptionIconClasses"
-                        :style="$descriptionIconStyles"
-                    />
-                @endif
-
-                <span
-                    @class([
-                        'fi-wi-stats-overview-stat-description text-sm',
-                        match ($descriptionColor) {
-                            'gray' => 'text-gray-500 dark:text-gray-400',
-                            default => 'fi-color-custom text-custom-600 dark:text-custom-400',
-                        },
-                        is_string($descriptionColor) ? "fi-color-{$descriptionColor}" : null,
-                    ])
-                    @style([
-                        \Filament\Support\get_color_css_variables(
-                            $descriptionColor,
-                            shades: [400, 600],
-                            alias: 'widgets::stats-overview-widget.stat.description',
-                        ) => $descriptionColor !== 'gray',
-                    ])
-                >
-                    {{ $description }}
+    @if ($url) {{ \Filament\Support\generate_href_html($url, $shouldOpenUrlInNewTab()) }} @endif
+    {{ $getExtraAttributeBag()->class([
+        'fi-wi-stats-overview-stat relative rounded-xl p-6 shadow-sm ring-1 ring-gray-950/5 dark:ring-white/10 ' .
+        $backgroundColor,
+    ]) }}>
+    <div class="flex gap-y-2 gap-x-3">
+        @if ($icon && $iconPosition === 'start')
+            <div class="{{ $iconContainerClasses }}">
+                <x-filament::icon :icon="$icon" class="{{ $iconClasses }}" />
+            </div>
+        @endif
+        <div class="flex-grow">
+            <div class="flex items-center gap-x-2">
+                <span class="fi-wi-stats-overview-stat-label text-sm font-medium {{ $labelColor }}">
+                    {{ $getLabel() }}
                 </span>
+            </div>
 
-                @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::After, 'after']))
-                    <x-filament::icon
-                        :icon="$descriptionIcon"
-                        :class="$descriptionIconClasses"
-                        :style="$descriptionIconStyles"
-                    />
-                @endif
+            <div
+                class="fi-wi-stats-overview-stat-value text-3xl font-semibold tracking-tight {{ $valueColor }}">
+                {{ $getValue() }}
+            </div>
+
+            @if ($description = $getDescription())
+                <div class="flex items-center gap-x-1">
+                    @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
+                        <x-filament::icon :icon="$descriptionIcon" :class="$descriptionIconClasses" :style="$descriptionIconStyles" />
+                    @endif
+
+                    <span @class([
+                        'fi-wi-stats-overview-stat-description text-sm',
+                        $descriptionColor
+                    ]) @style([
+                        \Filament\Support\get_color_css_variables($descriptionColor, shades: [400, 600], alias: 'widgets::stats-overview-widget.stat.description') => $descriptionColor !== 'gray',
+                    ])>
+                        {{ $description }}
+                    </span>
+
+                    @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::After, 'after']))
+                        <x-filament::icon :icon="$descriptionIcon" :class="$descriptionIconClasses" :style="$descriptionIconStyles" />
+                    @endif
+                </div>
+            @endif
+        </div>
+        @if ($icon && $iconPosition === 'end')
+            <div class="{{ $iconContainerClasses }}">
+                <x-filament::icon :icon="$icon" class="{{ $iconClasses }}" />
             </div>
         @endif
     </div>
 
+    @if (filled($progress))
+        <div class="w=full h-1 mt-3 bg-gray-200 dark:bg-gray-800 rounded-lg">
+            <div class="{{ $progressBarClasses }}" style="width: {{ $progress }}%"></div>
+        </div>
+    @endif
+
     @if ($chart = $getChart())
         {{-- An empty function to initialize the Alpine component with until it's loaded with `ax-load`. This removes the need for `x-ignore`, allowing the chart to be updated via Livewire polling. --}}
-        <div x-data="{ statsOverviewStatChart: function () {} }">
-            <div
-                @if (FilamentView::hasSpaMode())
-                    ax-load="visible"
+        <div x-data="{ statsOverviewStatChart: function() {} }">
+            <div @if (FilamentView::hasSpaMode()) ax-load="visible"
                 @else
-                    ax-load
-                @endif
+                    ax-load @endif
                 ax-load-src="{{ \Filament\Support\Facades\FilamentAsset::getAlpineComponentSrc('stats-overview/stat/chart', 'filament/widgets') }}"
                 x-data="statsOverviewStatChart({
-                            dataChecksum: @js($dataChecksum),
-                            labels: @js(array_keys($chart)),
-                            values: @js(array_values($chart)),
-                        })"
-                @class([
+                    dataChecksum: @js($dataChecksum),
+                    labels: @js(array_keys($chart)),
+                    values: @js(array_values($chart)),
+                })" @class([
                     'fi-wi-stats-overview-stat-chart absolute inset-x-0 bottom-0 overflow-hidden rounded-b-xl',
-                    match ($chartColor) {
-                        'gray' => null,
-                        default => 'fi-color-custom',
-                    },
-                    is_string($chartColor) ? "fi-color-{$chartColor}" : null,
                 ])
                 @style([
                     \Filament\Support\get_color_css_variables(
@@ -130,30 +117,17 @@
                         shades: [50, 400, 500],
                         alias: 'widgets::stats-overview-widget.stat.chart',
                     ) => $chartColor !== 'gray',
-                ])
-            >
-                <canvas x-ref="canvas" class="h-6"></canvas>
+                ])>
+                <canvas x-ref="canvas" height="60"></canvas>
 
-                <span
-                    x-ref="backgroundColorElement"
-                    @class([
-                        match ($chartColor) {
-                            'gray' => 'text-gray-100 dark:text-gray-800',
-                            default => 'text-custom-50 dark:text-custom-400/10',
-                        },
-                    ])
-                ></span>
+                <span x-ref="backgroundColorElement" @class([
+                    $chartBackgroundColor,
+                ])></span>
 
-                <span
-                    x-ref="borderColorElement"
-                    @class([
-                        match ($chartColor) {
-                            'gray' => 'text-gray-400',
-                            default => 'text-custom-500 dark:text-custom-400',
-                        },
-                    ])
-                ></span>
+                <span x-ref="borderColorElement" @class([
+                    $chartBorderColor,
+                ])></span>
             </div>
         </div>
     @endif
-</{!! $tag !!}>
+    </{!! $tag !!}>
