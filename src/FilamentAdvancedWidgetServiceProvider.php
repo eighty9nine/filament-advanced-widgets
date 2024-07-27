@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace EightyNine\FilamentAdvancedWidget;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,14 +13,14 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use EightyNine\FilamentAdvancedWidget\Commands\FilamentAdvancedWidgetCommand;
+use EightyNine\FilamentAdvancedWidget\Testing\TestsFilamentAdvancedWidget;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'filament-advanced-widgets';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'filament-advanced-widgets';
 
     public function configurePackage(Package $package): void
     {
@@ -36,7 +36,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
+                    ->askToStarRepoOnGitHub('eightynine/filament-advanced-widgets');
             });
 
         $configFileName = $package->shortName();
@@ -80,18 +80,18 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/filament-advanced-widgets/{$file->getFilename()}"),
+                ], 'filament-advanced-widgets-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton);
+        Testable::mixin(new TestsFilamentAdvancedWidget);
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'eightynine/filament-advanced-widgets';
     }
 
     /**
@@ -100,9 +100,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('filament-advanced-widgets', __DIR__ . '/../resources/dist/components/filament-advanced-widgets.js'),
+            Css::make('filament-advanced-widgets-styles', __DIR__ . '/../resources/dist/filament-advanced-widgets.css'),
+            Js::make('filament-advanced-widgets-scripts', __DIR__ . '/../resources/dist/filament-advanced-widgets.js'),
         ];
     }
 
@@ -112,7 +112,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+            FilamentAdvancedWidgetCommand::class,
         ];
     }
 
@@ -146,7 +146,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'create_filament-advanced-widgets_table',
         ];
     }
 }

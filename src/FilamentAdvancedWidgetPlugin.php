@@ -1,15 +1,15 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace EightyNine\FilamentAdvancedWidget;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
 
-class SkeletonPlugin implements Plugin
+class FilamentAdvancedWidgetPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'filament-advanced-widgets';
     }
 
     public function register(Panel $panel): void
