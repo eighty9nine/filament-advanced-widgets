@@ -58,20 +58,25 @@
                 </span>
             </div>
 
-            <div
-                class="fi-wi-stats-overview-stat-value text-3xl font-semibold tracking-tight {{ $valueColor }}">
+            <div class="fi-wi-stats-overview-stat-value text-3xl font-semibold tracking-tight {{ $valueColor }}">
                 {{ $getValue() }}
             </div>
 
+
+            @if (filled($progress))
+                <div class="w=full h-1 mt-3 mb-3 bg-gray-200 dark:bg-gray-800 rounded-lg {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
+                    <div class="{{ $progressBarClasses }}" style="width: {{ $progress }}%"></div>
+                </div>
+            @endif
             @if ($description = $getDescription())
-                <div class="flex items-center gap-x-1">
+                <div class="flex items-center gap-x-1 {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
                     @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
                         <x-filament::icon :icon="$descriptionIcon" :class="$descriptionIconClasses" :style="$descriptionIconStyles" />
                     @endif
 
                     <span @class([
                         'fi-wi-stats-overview-stat-description text-sm',
-                        $descriptionColor
+                        $descriptionColor,
                     ]) @style([
                         \Filament\Support\get_color_css_variables($descriptionColor, shades: [400, 600], alias: 'widgets::stats-overview-widget.stat.description') => $descriptionColor !== 'gray',
                     ])>
@@ -91,12 +96,6 @@
         @endif
     </div>
 
-    @if (filled($progress))
-        <div class="w=full h-1 mt-3 bg-gray-200 dark:bg-gray-800 rounded-lg">
-            <div class="{{ $progressBarClasses }}" style="width: {{ $progress }}%"></div>
-        </div>
-    @endif
-
     @if ($chart = $getChart())
         {{-- An empty function to initialize the Alpine component with until it's loaded with `ax-load`. This removes the need for `x-ignore`, allowing the chart to be updated via Livewire polling. --}}
         <div x-data="{ statsOverviewStatChart: function() {} }">
@@ -109,24 +108,15 @@
                     labels: @js(array_keys($chart)),
                     values: @js(array_values($chart)),
                 })" @class([
-                    'fi-wi-stats-overview-stat-chart absolute inset-x-0 bottom-0 overflow-hidden rounded-b-xl',
-                ])
-                @style([
-                    \Filament\Support\get_color_css_variables(
-                        $chartColor,
-                        shades: [50, 400, 500],
-                        alias: 'widgets::stats-overview-widget.stat.chart',
-                    ) => $chartColor !== 'gray',
+                    'fi-wi-stats-overview-stat-chart inset-x-0 bottom-0 overflow-hidden rounded-b-xl',
+                ]) @style([
+                    \Filament\Support\get_color_css_variables($chartColor, shades: [50, 400, 500], alias: 'widgets::stats-overview-widget.stat.chart') => $chartColor !== 'gray',
                 ])>
                 <canvas x-ref="canvas" height="60"></canvas>
 
-                <span x-ref="backgroundColorElement" @class([
-                    $chartBackgroundColor,
-                ])></span>
+                <span x-ref="backgroundColorElement" @class([$chartBackgroundColor])></span>
 
-                <span x-ref="borderColorElement" @class([
-                    $chartBorderColor,
-                ])></span>
+                <span x-ref="borderColorElement" @class([$chartBorderColor])></span>
             </div>
         </div>
     @endif
