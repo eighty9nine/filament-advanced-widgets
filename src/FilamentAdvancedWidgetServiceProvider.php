@@ -2,7 +2,6 @@
 
 namespace EightyNine\FilamentAdvancedWidget;
 
-use EightyNine\FilamentAdvancedWidget\Commands\Aliases\MakeAdvancedWidgetCommand;
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Assets\Css;
@@ -15,6 +14,7 @@ use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use EightyNine\FilamentAdvancedWidget\Commands\FilamentAdvancedWidgetCommand;
+use EightyNine\FilamentAdvancedWidget\Commands\MakeAdvancedWidgetCommand;
 use EightyNine\FilamentAdvancedWidget\Testing\TestsFilamentAdvancedWidget;
 
 class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider

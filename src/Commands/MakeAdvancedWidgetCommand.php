@@ -21,7 +21,7 @@ class MakeAdvancedWidgetCommand extends Command
 
     protected $description = 'Create a new Filament advanced widget class';
 
-    protected $signature = 'make:filament-widget {name?} {--R|resource=} {--C|chart} {--T|table} {--S|stats-overview} {--panel=} {--F|force}';
+    protected $signature = 'make:filament-advanced-widget {name?} {--R|resource=} {--C|advanced-chart} {--T|advanced-table} {--S|advanced-stats-overview} {--panel=} {--F|force}';
 
     public function handle(): int
     {
@@ -43,12 +43,12 @@ class MakeAdvancedWidgetCommand extends Command
         $resourceClass = null;
 
         $type = match (true) {
-            $this->option('chart') => 'Chart',
-            $this->option('stats-overview') => 'Stats overview',
-            $this->option('table') => 'Table',
+            $this->option('advanced-chart') => 'Advanced chart',
+            $this->option('advanced-stats-overview') => 'Advanced stats overview',
+            $this->option('advanced-table') => 'Advanced table',
             default => select(
                 label: 'What type of advanced widget do you want to create?',
-                options: ['Chart', 'Stats overview', 'Table', 'Custom'],
+                options: ['Advanced chart', 'Advanced stats overview', 'Advanced table', 'Custom'],
             ),
         };
 
@@ -163,23 +163,23 @@ class MakeAdvancedWidgetCommand extends Command
 
         if (! $this->option('force') && $this->checkForCollision([
             $path,
-            ...($this->option('stats-overview') || $this->option('chart')) ? [] : [$viewPath],
+            ...($this->option('advanced-stats-overview') || $this->option('advanced-chart')) ? [] : [$viewPath],
         ])) {
             return static::INVALID;
         }
 
-        if ($type === 'Chart') {
+        if ($type === 'Advanced chart') {
             $chartType = select(
                 label: 'Which type of chart would you like to create?',
                 options: [
-                    'Bar chart',
-                    'Bubble chart',
-                    'Doughnut chart',
-                    'Line chart',
-                    'Pie chart',
-                    'Polar area chart',
-                    'Radar chart',
-                    'Scatter chart',
+                    'Advanced Bar chart',
+                    'Advanced Bubble chart',
+                    'Advanced Doughnut chart',
+                    'Advanced Line chart',
+                    'Advanced Pie chart',
+                    'Advanced Polar area chart',
+                    'Advanced Radar chart',
+                    'Advanced Scatter chart',
                 ],
             );
 
@@ -187,40 +187,40 @@ class MakeAdvancedWidgetCommand extends Command
                 'class' => $widgetClass,
                 'namespace' => filled($resource) ? "{$resourceNamespace}\\{$resource}\\Widgets" . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : '') : $namespace . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : ''),
                 'type' => match ($chartType) {
-                    'Bar chart' => 'bar',
-                    'Bubble chart' => 'bubble',
-                    'Doughnut chart' => 'doughnut',
-                    'Pie chart' => 'pie',
-                    'Polar area chart' => 'polarArea',
-                    'Radar chart' => 'radar',
-                    'Scatter chart' => 'scatter',
+                    'Advanced Bar chart' => 'bar',
+                    'Advanced Bubble chart' => 'bubble',
+                    'Advanced Doughnut chart' => 'doughnut',
+                    'Advanced Pie chart' => 'pie',
+                    'Advanced Polar area chart' => 'polarArea',
+                    'Advanced Radar chart' => 'radar',
+                    'Advanced Scatter chart' => 'scatter',
                     default => 'line',
                 },
             ]);
-        } elseif ($type === 'Stats overview') {
-            $this->copyStubToApp('StatsOverviewWidget', $path, [
+        } elseif ($type === 'Advanced stats overview') {
+            $this->copyStubToApp('AdvancedStatsOverviewWidget', $path, [
                 'class' => $widgetClass,
                 'namespace' => filled($resource) ? "{$resourceNamespace}\\{$resource}\\Widgets" . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : '') : $namespace . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : ''),
             ]);
-        } elseif ($type === 'Table') {
-            $this->copyStubToApp('TableWidget', $path, [
+        } elseif ($type === 'Advanced table') {
+            $this->copyStubToApp('AdvancedTableWidget', $path, [
                 'class' => $widgetClass,
                 'namespace' => filled($resource) ? "{$resourceNamespace}\\{$resource}\\Widgets" . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : '') : $namespace . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : ''),
             ]);
         } else {
-            $this->copyStubToApp('Widget', $path, [
+            $this->copyStubToApp('AdvancedWidget', $path, [
                 'class' => $widgetClass,
                 'namespace' => filled($resource) ? "{$resourceNamespace}\\{$resource}\\Widgets" . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : '') : $namespace . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : ''),
                 'view' => $view,
             ]);
 
-            $this->copyStubToApp('WidgetView', $viewPath);
+            $this->copyStubToApp('AdvancedWidgetView', $viewPath);
         }
 
-        $this->components->info("Filament widget [{$path}] created successfully.");
+        $this->components->info("Filament advanced widget [{$path}] created successfully.");
 
         if ($resource !== null) {
-            $this->components->info("Make sure to register the widget in `{$resourceClass}::getWidgets()`, and then again in `getHeaderWidgets()` or `getFooterWidgets()` of any `{$resourceClass}` page.");
+            $this->components->info("Make sure to register the advanced widget in `{$resourceClass}::getWidgets()`, and then again in `getHeaderWidgets()` or `getFooterWidgets()` of any `{$resourceClass}` page.");
         }
 
         return static::SUCCESS;

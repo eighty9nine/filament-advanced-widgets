@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
-use Filament\Widgets\ChartWidget;
+use EightyNine\FilamentAdvancedWidget\AdvancedChartWidget;
 
-class {{ class }} extends ChartWidget
+class {{ class }} extends AdvancedChartWidget
 {
     protected static ?string $heading = 'Chart';
 

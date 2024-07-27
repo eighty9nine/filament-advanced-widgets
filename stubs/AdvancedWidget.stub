@@ -2,9 +2,9 @@
 
 namespace {{ namespace }};
 
-use Filament\Widgets\Widget;
+use EightyNine\FilamentAdvancedWidget\AdvancedWidget;
 
-class {{ class }} extends Widget
+class {{ class }} extends AdvancedWidget
 {
     protected static string $view = '{{ view }}';
 }

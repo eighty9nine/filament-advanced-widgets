@@ -4,7 +4,7 @@ namespace {{ namespace }};
 
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Widgets\TableWidget as BaseWidget;
+use EightyNine\FilamentAdvancedWidget\AdvancedTableWidget as BaseWidget;
 
 class {{ class }} extends BaseWidget
 {

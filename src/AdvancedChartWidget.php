@@ -36,7 +36,7 @@ abstract class AdvancedChartWidget extends AdvancedWidget
     /**
      * @var view-string
      */
-    protected static string $view = 'advanced-widgets::chart-widget';
+    protected static string $view = 'advanced-widgets::advanced-chart-widget';
 
     public function mount(): void
     {

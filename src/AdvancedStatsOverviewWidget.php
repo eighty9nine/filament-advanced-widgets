@@ -18,7 +18,7 @@ class AdvancedStatsOverviewWidget extends AdvancedWidget
     /**
      * @var view-string
      */
-    protected static string $view = 'advanced-widgets::stats-overview-widget';
+    protected static string $view = 'advanced-widgets::advanced-stats-overview-widget';
 
     protected function getColumns(): int
     {

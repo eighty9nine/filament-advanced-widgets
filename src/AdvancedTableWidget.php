@@ -24,7 +24,7 @@ class AdvancedTableWidget extends AdvancedWidget implements Actions\Contracts\Ha
     /**
      * @var view-string
      */
-    protected static string $view = 'advanced-widgets::table-widget';
+    protected static string $view = 'advanced-widgets::advanced-table-widget';
 
     /**
      * @deprecated Override the `table()` method to configure the table.
