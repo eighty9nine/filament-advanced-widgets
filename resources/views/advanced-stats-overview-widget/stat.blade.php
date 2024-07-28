@@ -12,21 +12,83 @@
     $iconPosition = $getIconPosition();
 
     $icon = $getIcon();
-    $iconClasses = "fi-wi-stats-overview-stat-icon h-8 w-8 {$getIconColor()}";
-    $backgroundColor = $iconHasBackgroundColor() ? $getIconBackgroundColor() : '';
-    $iconContainerClasses = "{$backgroundColor} h-fit p-1 rounded-lg";
+    $iconColor = match ($getIconColor()) {
+        'primary' => 'text-primary-500',
+        'secondary' => 'text-secondary-500',
+        'success' => 'text-success-500',
+        'danger' => 'text-danger-500',
+        'warning' => 'text-warning-500',
+        'info' => 'text-info-500',
+        default => 'text-gray-500',
+    };
+
+    $iconClasses = "fi-wi-stats-overview-stat-icon h-8 w-8 {$iconColor}";
+    $iconBackgroundColor = $iconHasBackgroundColor() ? match ($getIconBackgroundColor()) {
+        'primary' => 'bg-primary-200 dark:bg-primary-950',
+        'secondary' => 'bg-secondary-200 dark:bg-secondary-950',
+        'success' => 'bg-success-200 dark:bg-success-950',
+        'danger' => 'bg-danger-200 dark:bg-danger-950',
+        'warning' => 'bg-warning-200 dark:bg-warning-950',
+        'info' => 'bg-info-200 dark:bg-info-950',
+        default => 'bg-gray-200 dark:bg-gray-950',
+    } : '';
+
+    $iconContainerClasses = "{$iconBackgroundColor} h-fit p-1 rounded-lg";
 
     $progress = $getProgress();
     $progressBarColor = $getProgressBarColor();
     $progressBarClasses = "fi-wi-stats-overview-stat-progress-bar h-full w-full rounded-lg {$progressBarColor}";
 
-    $backgroundColor = $getBackgroundColor();
-    $labelColor = $getLabelColor();
-    $valueColor = $getValueColor();
-    $descriptionColor = $getDescriptionColor();
+    $backgroundColor = match ($getBackgroundColor()) {
+        'primary' => 'bg-primary-500',
+        'secondary' => 'bg-secondary-500',
+        'success' => 'bg-success-500',
+        'danger' => 'bg-danger-500',
+        'warning' => 'bg-warning-500',
+        'info' => 'bg-info-500',
+        default => ' bg-white dark:bg-gray-900',
+    };
+    $labelColor = match ($getLabelColor()) {
+        'primary' => 'text-primary-500',
+        'secondary' => 'text-secondary-500',
+        'success' => 'text-success-500',
+        'danger' => 'text-danger-500',
+        'warning' => 'text-warning-500',
+        'info' => 'text-info-500',
+        default => 'text-gray-950 dark:text-white',
+    };
+    $valueColor = match ($getValueColor()) {
+        'primary' => 'text-primary-600',
+        'secondary' => 'text-secondary-600',
+        'success' => 'text-success-600',
+        'danger' => 'text-danger-600',
+        'warning' => 'text-warning-600',
+        'info' => 'text-info-600',
+        default => 'text-gray-950 dark:text-white',
+    };
+    $descriptionColor = match ($getDescriptionColor()) {
+        'primary' => 'text-primary-600',
+        'secondary' => 'text-secondary-600',
+        'success' => 'text-success-600',
+        'danger' => 'text-danger-600',
+        'warning' => 'text-warning-600',
+        'info' => 'text-info-600',
+        default => 'text-gray-950 dark:text-white',
+    };
 
-    $chartBorderColor = $getChartBorderColor();
-    $chartBackgroundColor = $getChartBackgroundColor();
+    $chartBorderColor = match ($getChartBorderColor()) {
+        'primary' => 'text-primary-600 border-3',
+        'secondary' => 'text-secondary-600 border-3',
+        'success' => 'text-success-600 border-3',
+        'danger' => 'text-danger-600 border-3',
+        'warning' => 'text-warning-600 border-3',
+        'info' => 'text-info-600 border-3',
+        default => 'text-gray-600 border-3',
+    };
+    $chartBackgroundColor = match ($getChartBackgroundColor()) {
+        'gray' => 'text-gray-100 dark:text-gray-800',
+        default => 'text-custom-50 dark:text-custom-400/10',
+    };
 
     $descriptionIconClasses = "fi-wi-stats-overview-stat-description-icon h-5 w-5 {$descriptionColor}";
 
@@ -64,12 +126,14 @@
 
 
             @if (filled($progress))
-                <div class="w=full h-1 mt-3 mb-3 bg-gray-200 dark:bg-gray-800 rounded-lg {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
+                <div
+                    class="w=full h-1 mt-3 mb-3 bg-gray-200 dark:bg-gray-800 rounded-lg {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
                     <div class="{{ $progressBarClasses }}" style="width: {{ $progress }}%"></div>
                 </div>
             @endif
             @if ($description = $getDescription())
-                <div class="flex items-center gap-x-1 {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
+                <div
+                    class="flex items-center gap-x-1 {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
                     @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
                         <x-filament::icon :icon="$descriptionIcon" :class="$descriptionIconClasses" :style="$descriptionIconStyles" />
                     @endif

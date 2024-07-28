@@ -16,6 +16,7 @@ use Spatie\LaravelPackageTools\PackageServiceProvider;
 use EightyNine\FilamentAdvancedWidget\Commands\FilamentAdvancedWidgetCommand;
 use EightyNine\FilamentAdvancedWidget\Commands\MakeAdvancedWidgetCommand;
 use EightyNine\FilamentAdvancedWidget\Testing\TestsFilamentAdvancedWidget;
+use Illuminate\Support\Facades\Blade;
 
 class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
 {
@@ -32,6 +33,7 @@ class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
          */
         $package->name(static::$name)
             ->hasCommands($this->getCommands())
+            ->hasViews(static::$viewNamespace)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()

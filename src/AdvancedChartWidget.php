@@ -8,7 +8,8 @@ use Livewire\Attributes\Locked;
 
 abstract class AdvancedChartWidget extends AdvancedWidget
 {
-    use Concerns\CanPoll;
+    use Concerns\CanPoll,
+        Concerns\CanBeCustomised;
 
     /**
      * @var array<string, mixed> | null
@@ -25,6 +26,8 @@ abstract class AdvancedChartWidget extends AdvancedWidget
     protected static ?string $heading = null;
 
     protected static ?string $description = null;
+
+    protected static ?string $label = null;
 
     protected static ?string $maxHeight = null;
 
@@ -77,6 +80,11 @@ abstract class AdvancedChartWidget extends AdvancedWidget
     public function getHeading(): string | Htmlable | null
     {
         return static::$heading;
+    }
+
+    public function getLabel(): string | Htmlable | null
+    {
+        return static::$label;
     }
 
     public function getDescription(): string | Htmlable | null

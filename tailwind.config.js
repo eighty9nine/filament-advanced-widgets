@@ -7,6 +7,7 @@ module.exports = {
         './src/AdvancedStatsOverviewWidget/Concerns/**/*.php',
         './resources/views/filament/**/*.blade.php',
         './resources/views/**/*.blade.php',
+        './resources/views/components/**/*.blade.php',
         './vendor/filament/**/*.blade.php',
     ],
 }

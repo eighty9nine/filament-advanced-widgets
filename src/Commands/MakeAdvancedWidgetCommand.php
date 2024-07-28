@@ -183,7 +183,7 @@ class MakeAdvancedWidgetCommand extends Command
                 ],
             );
 
-            $this->copyStubToApp('ChartWidget', $path, [
+            $this->copyStubToApp('AdvancedChartWidget', $path, [
                 'class' => $widgetClass,
                 'namespace' => filled($resource) ? "{$resourceNamespace}\\{$resource}\\Widgets" . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : '') : $namespace . ($widgetNamespace !== '' ? "\\{$widgetNamespace}" : ''),
                 'type' => match ($chartType) {
