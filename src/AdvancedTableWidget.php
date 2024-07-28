@@ -14,6 +14,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class AdvancedTableWidget extends AdvancedWidget implements Actions\Contracts\HasActions, Forms\Contracts\HasForms, Infolists\Contracts\HasInfolists, Tables\Contracts\HasTable
 {
+    use Concerns\CanBeCustomised,
+        Concerns\HasSectionContent;
     use Actions\Concerns\InteractsWithActions;
     use Forms\Concerns\InteractsWithForms;
     use Infolists\Concerns\InteractsWithInfolists;
