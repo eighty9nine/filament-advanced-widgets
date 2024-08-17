@@ -22,44 +22,126 @@ You can install the package via composer:
 composer require eightynine/filament-advanced-widgets
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="filament-advanced-widgets-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="filament-advanced-widgets-config"
-```
-
-Optionally, you can publish the views using
-
-```bash
-php artisan vendor:publish --tag="filament-advanced-widgets-views"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
 ## Usage
 
-```php
-$filamentAdvancedWidget = new EightyNine\FilamentAdvancedWidget();
-echo $filamentAdvancedWidget->echoPhrase('Hello, EightyNine!');
+### Advanced Stats Overview Widget
+
+The package comes with a "advanced stats overview". It's exactly like the [stats overview widget](https://filamentphp.com/docs/3.x/widgets/stats-overview), but with a few extra features.
+
+Start by creating a widget with the command:
+```bash
+php artisan make:filament-advanced-widget AdvancedStatsOverviewWidget --stats-overview
 ```
 
-## Testing
+This command will create a new StatsOverview.php file. Open it, and return Stat instances from the getStats() method. Below is a sample widget:
+
+```php
+
+use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget as BaseWidget;
+use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget\Stat;
+
+class GeneralStatsOverviewWidget extends BaseWidget
+{
+    protected static ?string $pollingInterval = null;
+
+    protected function getStats(): array
+    {
+        return [
+            Stat::make('Total Users', "124k")->icon('heroicon-o-user')
+                ->backgroundColor('info')
+                ->progress(69)
+                ->progressBarColor('success')
+                ->iconBackgroundColor('success')
+                ->chartColor('success')
+                ->iconPosition('start')
+                ->description('The users in this period')
+                ->descriptionIcon('heroicon-o-chevron-up', 'before')
+                ->descriptionColor('success')
+                ->iconColor('success'),
+            Stat::make('Total Posts', "1.2k")->icon('heroicon-o-newspaper')
+                ->description('The posts in this period')
+                ->descriptionIcon('heroicon-o-chevron-up', 'before')               
+                ->descriptionColor('primary')
+                ->iconColor('warning'),
+            Stat::make('Total Comments', "23.4k")->icon('heroicon-o-chat-bubble-left-ellipsis')
+                ->description("The comments in this period")
+                ->descriptionIcon('heroicon-o-chevron-down', 'before')
+                ->descriptionColor('danger')
+                ->iconColor('danger')
+        ];
+    }
+}
+```
+
+### Advanced Chart Widget
+
+The package comes with a "advanced chart". It's exactly like the [chart widget](https://filamentphp.com/docs/3.x/widgets/chart), but with a few extra features.
+
+Start by creating a widget with the command:
 
 ```bash
-composer test
+php artisan make:filament-advanced-widget AdvancedChartWidget --chart
 ```
+
+This command will create a new AdvancedChartWidget.php file. Below is a sample widget:
+
+```php
+
+use EightyNine\FilamentAdvancedWidget\AdvancedChartWidget;
+
+class MonthlyUsersChart extends AdvancedChartWidget
+{
+
+    protected static ?string $heading = '187.2k';
+    protected static string $color = 'info';
+    protected static ?string $icon = 'heroicon-o-chart-bar';
+    protected static ?string $iconColor = 'info';
+    protected static ?string $iconBackgroundColor = 'info';
+    protected static ?string $label = 'Monthly users chart';
+
+    protected static ?string $badge = 'new';
+    protected static ?string $badgeColor = 'success';
+    protected static ?string $badgeIcon = 'heroicon-o-check-circle';
+    protected static ?string $badgeIconPosition = 'after';
+    protected static ?string $badgeSize = 'xs';
+
+
+    public ?string $filter = 'today';
+
+    protected function getFilters(): ?array
+    {
+        return [
+            'today' => 'Today',
+            'week' => 'Last week',
+            'month' => 'Last month',
+            'year' => 'This year',
+        ];
+    }
+
+    protected function getData(): array
+    {
+        return [
+            'datasets' => [
+                [
+                    'label' => 'Blog posts created',
+                    'data' => [0, 10, 5, 2, 21, 32, 45, 74, 65, 45, 77, 89],
+                ],
+            ],
+            'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+        ];
+    }
+
+    protected function getType(): string
+    {
+        return 'line';
+    }
+}
+
+```
+
+### Advanced Table Widget
+Currently, the table widget is not fully customizable. This is a work in progress.
+
 
 ## Changelog
 
