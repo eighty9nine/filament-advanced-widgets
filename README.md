@@ -1,13 +1,18 @@
 # Advanced widgets for your filament php application
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/eightynine/filament-advanced-widgets.svg?style=flat-square)](https://packagist.org/packages/eightynine/filament-advanced-widgets)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/eightynine/filament-advanced-widgets/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/eightynine/filament-advanced-widgets/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/eightynine/filament-advanced-widgets/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/eightynine/filament-advanced-widgets/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/eightynine/filament-advanced-widgets.svg?style=flat-square)](https://packagist.org/packages/eightynine/filament-advanced-widgets)
 
 
+## 🛠️ Be Part of the Journey
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+Hi, I'm Eighty Nine. I created page alerts plugin to solve real problems I faced as a developer. Your sponsorship will allow me to dedicate more time to enhancing these tools and helping more people. [Become a sponsor](https://github.com/sponsors/eighty9nine) and join me in making a positive impact on the developer community.
+
+## Introduction
+
+This package provides a set of advanced widgets for your Filament application. These widgets are designed to be highly customizable and offer a range of features to enhance your application's user experience. Whether you're looking for a simple chart widget or a complex table widget, you can find the perfect solution here.
+
+![Package screenshot](https://raw.githubusercontent.com/eighty9nine/filament-advanced-widgets/3.x/resources/img/advanced-widget-screenshot.png)
 
 ## Installation
 
