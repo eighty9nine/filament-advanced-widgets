@@ -3,7 +3,7 @@
 namespace {{ namespace }};
 
 use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget as BaseWidget;
-use use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget\Stat;
+use EightyNine\FilamentAdvancedWidget\AdvancedStatsOverviewWidget\Stat;
 
 class {{ class }} extends BaseWidget
 {
