@@ -31,7 +31,7 @@ The package comes with a "advanced stats overview". It's exactly like the [stats
 
 Start by creating a widget with the command:
 ```bash
-php artisan make:filament-advanced-widget AdvancedStatsOverviewWidget --stats-overview
+php artisan make:filament-advanced-widget AdvancedStatsOverviewWidget --advanced-stats-overview
 ```
 
 This command will create a new StatsOverview.php file. Open it, and return Stat instances from the getStats() method. Below is a sample widget:
@@ -108,7 +108,7 @@ The package comes with a "advanced chart". It's exactly like the [chart widget](
 Start by creating a widget with the command:
 
 ```bash
-php artisan make:filament-advanced-widget AdvancedChartWidget --chart
+php artisan make:filament-advanced-widget AdvancedChartWidget --advanced-chart
 ```
 
 This command will create a new AdvancedChartWidget.php file. Below is a sample widget:
