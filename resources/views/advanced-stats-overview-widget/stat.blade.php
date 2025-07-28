@@ -127,13 +127,13 @@
 
             @if (filled($progress))
                 <div
-                    class="w=full h-1 mt-3 mb-3 bg-gray-200 dark:bg-gray-800 rounded-lg {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
+                    class="w=full h-1 mt-3 mb-3 bg-gray-200 dark:bg-gray-800 rounded-lg {{ $icon && $iconPosition === 'end' ? '-ms-[50px]' : '-me-[50px]' }}">
                     <div class="{{ $progressBarClasses }}" style="width: {{ $progress }}%"></div>
                 </div>
             @endif
             @if ($description = $getDescription())
                 <div
-                    class="flex items-center gap-x-1 {{ $icon && $iconPosition === 'end' ? '-mr-[50px]' : '-ml-[50px]' }}">
+                    class="flex items-center gap-x-1 {{ $icon && $iconPosition === 'end' ? '-ms-[50px]' : '-me-[50px]' }}">
                     @if ($descriptionIcon && in_array($descriptionIconPosition, [IconPosition::Before, 'before']))
                         <x-filament::icon :icon="$descriptionIcon" :class="$descriptionIconClasses" :style="$descriptionIconStyles" />
                     @endif
