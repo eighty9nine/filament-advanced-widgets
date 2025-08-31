@@ -57,6 +57,20 @@ trait HasColorCustomisation
         return $this;
     }
 
+    public function labelColor(string $color): static
+    {
+        $this->labelColor = $color;
+
+        return $this;
+    }
+
+    public function valueColor(string $color): static
+    {
+        $this->valueColor = $color;
+
+        return $this;
+    }
+
     public function getLabelColor(): ?string
     {
         return $this->labelColor;
