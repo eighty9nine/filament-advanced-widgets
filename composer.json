@@ -1,12 +1,21 @@
 {
-    "name": "launche12/filament-advanced-widgets",
+    "name": "eightynine/filament-advanced-widgets",
     "description": "Advanced widgets for your filament php application",
     "keywords": [
         "eightynine",
         "laravel",
         "filament-advanced-widgets"
     ],
-    "homepage": "https://github.com/launche12/filament-advanced-widgets",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/launche12/filament-advanced-widgets"
+        }
+    ],
+    "require": {
+        "eightynine/filament-advanced-widgets": "dev-main"
+    }
+    "homepage": "https://github.com/eightynine/filament-advanced-widgets",
     "support": {
         "issues": "https://github.com/eightynine/filament-advanced-widgets/issues",
         "source": "https://github.com/eightynine/filament-advanced-widgets"
