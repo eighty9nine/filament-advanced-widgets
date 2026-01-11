@@ -14,22 +14,22 @@
     $icon = $getIcon();
     $iconColor = match ($getIconColor()) {
         'primary' => 'text-primary-500',
-        'secondary' => 'text-secondary-500',
+        'secondary' => 'text-slate-500',
         'success' => 'text-success-500',
         'danger' => 'text-danger-500',
         'warning' => 'text-warning-500',
-        'info' => 'text-info-500',
+        'info' => 'text-gray-500',
         default => 'text-gray-500',
     };
 
     $iconClasses = "fi-wi-stats-overview-stat-icon h-8 w-8 {$iconColor}";
     $iconBackgroundColor = $iconHasBackgroundColor() ? match ($getIconBackgroundColor()) {
         'primary' => 'bg-primary-200 dark:bg-primary-950',
-        'secondary' => 'bg-secondary-200 dark:bg-secondary-950',
+        'secondary' => 'bg-slate-200 dark:bg-slate-950',
         'success' => 'bg-success-200 dark:bg-success-950',
         'danger' => 'bg-danger-200 dark:bg-danger-950',
         'warning' => 'bg-warning-200 dark:bg-warning-950',
-        'info' => 'bg-info-200 dark:bg-info-950',
+        'info' => 'bg-gray-200 dark:bg-gray-950',
         default => 'bg-gray-200 dark:bg-gray-950',
     } : '';
 
@@ -41,11 +41,11 @@
 
     $backgroundColor = match ($getBackgroundColor()) {
         'primary' => 'bg-primary-500',
-        'secondary' => 'bg-secondary-500',
+        'secondary' => 'bg-slate-500',
         'success' => 'bg-success-500',
         'danger' => 'bg-danger-500',
         'warning' => 'bg-warning-500',
-        'info' => 'bg-info-500',
+        'info' => 'bg-gray-500',
         default => ' bg-white dark:bg-gray-900',
     };
     $labelColor = match ($getLabelColor()) {
