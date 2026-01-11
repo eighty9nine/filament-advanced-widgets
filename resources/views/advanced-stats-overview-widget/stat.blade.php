@@ -50,39 +50,39 @@
     };
     $labelColor = match ($getLabelColor()) {
         'primary' => 'text-primary-500',
-        'secondary' => 'text-secondary-500',
+        'secondary' => 'text-slate-500',
         'success' => 'text-success-500',
         'danger' => 'text-danger-500',
         'warning' => 'text-warning-500',
-        'info' => 'text-info-500',
+        'info' => 'text-gray-500',
         default => 'text-gray-950 dark:text-white',
     };
     $valueColor = match ($getValueColor()) {
         'primary' => 'text-primary-600',
-        'secondary' => 'text-secondary-600',
+        'secondary' => 'text-slate-500',
         'success' => 'text-success-600',
         'danger' => 'text-danger-600',
         'warning' => 'text-warning-600',
-        'info' => 'text-info-600',
+        'info' => 'text-gray-600',
         default => 'text-gray-950 dark:text-white',
     };
     $descriptionColor = match ($getDescriptionColor()) {
         'primary' => 'text-primary-600',
-        'secondary' => 'text-secondary-600',
+        'secondary' => 'text-slate-500',
         'success' => 'text-success-600',
         'danger' => 'text-danger-600',
         'warning' => 'text-warning-600',
-        'info' => 'text-info-600',
+        'info' => 'text-gray-600',
         default => 'text-gray-950 dark:text-white',
     };
 
     $chartBorderColor = match ($getChartBorderColor()) {
         'primary' => 'text-primary-600 border-3',
-        'secondary' => 'text-secondary-600 border-3',
+        'secondary' => 'text-slate-600 border-3',
         'success' => 'text-success-600 border-3',
         'danger' => 'text-danger-600 border-3',
         'warning' => 'text-warning-600 border-3',
-        'info' => 'text-info-600 border-3',
+        'info' => 'text-gray-600 border-3',
         default => 'text-gray-600 border-3',
     };
     $chartBackgroundColor = match ($getChartBackgroundColor()) {
