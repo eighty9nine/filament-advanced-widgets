@@ -29,6 +29,15 @@ composer require eightynine/filament-advanced-widgets
 
 The package comes with a "advanced stats overview". It's exactly like the [stats overview widget](https://filamentphp.com/docs/3.x/widgets/stats-overview), but with a few extra features.
 
+
+#### CSS configuration (Tailwind V4)
+1. You need to [create a theme for your panel](https://filamentphp.com/docs/4.x/styling/overview#creating-a-custom-theme) if you don't have one already,
+2. and then add the following to your `theme.css` file:
+```css
+@import '../../../../vendor/eightynine/filament-advanced-widgets/resources/css/index.css';
+```
+
+#### Play with the widget
 Start by creating a widget with the command:
 ```bash
 php artisan make:filament-advanced-widget AdvancedStatsOverviewWidget --advanced-stats-overview
