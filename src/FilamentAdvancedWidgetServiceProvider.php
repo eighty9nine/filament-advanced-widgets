@@ -104,8 +104,8 @@ class FilamentAdvancedWidgetServiceProvider extends PackageServiceProvider
     {
         return [
             // AlpineComponent::make('filament-advanced-widgets', __DIR__ . '/../resources/dist/components/filament-advanced-widgets.js'),
-            Css::make('filament-advanced-widgets-styles', __DIR__ . '/../resources/dist/filament-advanced-widgets.css'),
-            Js::make('filament-advanced-widgets-scripts', __DIR__ . '/../resources/dist/filament-advanced-widgets.js'),
+            /*Css::make('filament-advanced-widgets-styles', __DIR__ . '/../resources/dist/filament-advanced-widgets.css'),
+            Js::make('filament-advanced-widgets-scripts', __DIR__ . '/../resources/dist/filament-advanced-widgets.js'),*/
         ];
     }
 
