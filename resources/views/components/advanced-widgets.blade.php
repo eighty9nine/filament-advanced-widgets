@@ -1,20 +1,23 @@
 @props([
-    'columns' => [
-        'lg' => 2,
-    ],
-    'data' => [],
-    'widgets' => [],
-])
+      'columns' => [
+          'lg' => 2,
+      ],
+      'data' => [],
+      'widgets' => [],
+  ])
 
-<x-filament::grid
-    :default="$columns['default'] ?? 1"
-    :sm="$columns['sm'] ?? null"
-    :md="$columns['md'] ?? null"
-    :lg="$columns['lg'] ?? ($columns ? (is_array($columns) ? null : $columns) : 2)"
-    :xl="$columns['xl'] ?? null"
-    :two-xl="$columns['2xl'] ?? null"
-    :attributes="\Filament\Support\prepare_inherited_attributes($attributes)->class('fi-wi gap-6')"
->
+@php
+    $cols = is_array($columns) ? $columns : ['default' => $columns];
+    $gridClasses = 'fi-wi grid gap-6';
+    $gridClasses .= ' grid-cols-' . ($cols['default'] ?? 1);
+    if ($cols['sm'] ?? null) $gridClasses .= ' sm:grid-cols-' . $cols['sm'];
+    if ($cols['md'] ?? null) $gridClasses .= ' md:grid-cols-' . $cols['md'];
+    if ($cols['lg'] ?? null) $gridClasses .= ' lg:grid-cols-' . ($cols['lg'] ?? 2);
+    if ($cols['xl'] ?? null) $gridClasses .= ' xl:grid-cols-' . $cols['xl'];
+    if ($cols['2xl'] ?? null) $gridClasses .= ' 2xl:grid-cols-' . $cols['2xl'];
+@endphp
+
+<div {{ $attributes->class($gridClasses) }}>
     @php
         $normalizeWidgetClass = function (string | Filament\Widgets\WidgetConfiguration $widget): string {
             if ($widget instanceof \Filament\Widgets\WidgetConfiguration) {
@@ -32,8 +35,9 @@
 
         @livewire(
             $widgetClass,
-            [...(($widget instanceof \Filament\Widgets\WidgetConfiguration) ? [...$widget->widget::getDefaultProperties(), ...$widget->getProperties()] : $widget::getDefaultProperties()), ...$data],
+            [...(($widget instanceof \Filament\Widgets\WidgetConfiguration) ? [...$widget->widget::getDefaultProperties(), ...$widget->getProperties()] : $widget::getDefaultProperties()),
+...$data],
             key("{$widgetClass}-{$widgetKey}"),
         )
     @endforeach
-</x-filament::grid>
+</div>
